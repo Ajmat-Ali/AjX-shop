@@ -14,7 +14,8 @@
   "author": "Ajmat ALi",
   "type": "commonjs",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "start": "parcel index.html"
   },
   "dependencies": {
     "parcel": "^2.16.3",
