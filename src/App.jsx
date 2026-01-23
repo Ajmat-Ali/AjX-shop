@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import NavBar from "./component/Navbar";
+import Header from "./component/Header";
 
 export default function App() {
   useEffect(() => {
@@ -8,9 +8,11 @@ export default function App() {
 
   return (
     <>
-      <h1>App Component</h1>
-      <NavBar />
-      {console.log("Inside APP Render")}
+      <div className="bg-gray-200 height-500">
+        <Header />
+        <h1>App Component</h1>
+        {console.log("Inside APP Render")}
+      </div>
     </>
   );
 }
