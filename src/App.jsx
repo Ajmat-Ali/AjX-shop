@@ -1,5 +1,6 @@
 import { useEffect } from "react";
-import Header from "./component/Header";
+import { Home } from "./pages/Home";
+import Header from './component/Header'
 
 export default function App() {
   useEffect(() => {
@@ -8,8 +9,9 @@ export default function App() {
 
   return (
     <>
-      <div className="bg-gray-200 height-500">
-        <Header />
+      <div className="bg-gray-50 w-11/12 m-auto mt-1 rounded-xl">
+        <Header/>
+       <Home/>
         <h1>App Component</h1>
         {console.log("Inside APP Render")}
       </div>
