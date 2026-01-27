@@ -7,7 +7,7 @@ import { IoPersonCircle } from "react-icons/io5";
 export default function Header() {
   return (
     <>
-      <header className="flex justify-between p-4 bg-white shadow-xl rounded-md">
+      <header className="flex justify-between p-4 bg-white shadow-xl rounded-md mb-10">
         <div className="border-2">
           <h1 className="text-3xl font-bold">
             <span className="text-blue-400">AjX</span> Shop
