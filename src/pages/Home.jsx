@@ -7,8 +7,8 @@ import useDebounce from "../components/useDebounce";
 export const Home = () => {
   const [search, setSearch] = useState("");
 
-  const x = useDebounce(search, 1000);
-  console.log("Retured Debounce Value", x);
+  // const x = useDebounce(search, 1000);
+  // console.log("Retured Debounce Value", x);
 
   const handleSearch = (e) => {
     setSearch(e.target.value);

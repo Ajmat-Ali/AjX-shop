@@ -1,10 +1,13 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa6";
 import { IoPersonCircleSharp } from "react-icons/io5";
 import { IoPersonCircle } from "react-icons/io5";
 
-export default function Header() {
+export default function Header({ auth, setAuth }) {
+  const handleLogin = () => {
+    setAuth(!auth);
+  };
   return (
     <>
       <header className="flex justify-between p-4 bg-white shadow-xl rounded-md mb-10">
@@ -22,7 +25,7 @@ export default function Header() {
             <li className="cursor-pointer">
               <FaHeart size={20} />
             </li>
-            <li className="cursor-pointer">
+            <li className="cursor-pointer" onClick={handleLogin}>
               <IoPersonCircle size={25} />
             </li>
             {/* <li>Profile</li> */}

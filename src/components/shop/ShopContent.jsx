@@ -1,8 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Pagination from "./Pagination";
 import ShimmerUI from "./ShimmerUI";
+import Card from "./Card";
+import { ProductsContext } from "../../context/createContext";
 
 const ShopContent = () => {
+  const products = useContext(ProductsContext);
+
   useState([]);
 
   return (
@@ -23,7 +27,7 @@ const ShopContent = () => {
           </div>
         </div>
       </div>
-      <ShimmerUI />
+      {products.length <= 0 ? <ShimmerUI /> : <Card />}
       <Pagination />
     </div>
   );
