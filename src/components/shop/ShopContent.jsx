@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import Pagination from "./Pagination";
 import ShimmerUI from "./ShimmerUI";
-import Card from "./Card";
+import ProductCard from "./ProductCard";
 import { ProductsContext } from "../../context/createContext";
 
 const ShopContent = () => {
@@ -27,7 +27,12 @@ const ShopContent = () => {
           </div>
         </div>
       </div>
-      {products.length <= 0 ? <ShimmerUI /> : <Card />}
+      {products.length <= 0 && <ShimmerUI />}
+      <div className="grid grid-cols-3 gap-x-20 gap-y-20">
+        {products.map((product) => {
+          return <ProductCard key={product.id} product={product} />;
+        })}
+      </div>
       <Pagination />
     </div>
   );
