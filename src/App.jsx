@@ -9,7 +9,7 @@ export default function App() {
 
   return (
     <>
-      <div className="bg-gray-50 w-11/12 m-auto mt-1 rounded-xl">
+      <div className="bg-gray-50 w-11/12 m-auto mt-1 rounded-xl ">
         <Header />
         <Outlet />
       </div>

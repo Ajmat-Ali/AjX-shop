@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import Pagination from "./Pagination";
-import ShimmerUI from "./ShimmerUI";
+import ShimmerUI from "../ShimmerUI";
 import ProductCard from "./ProductCard";
 import { ProductsContext } from "../../context/createContext";
 
@@ -27,14 +27,24 @@ const ShopContent = () => {
           </div>
         </div>
       </div>
-      {products.length <= 0 && <ShimmerUI />}
-      <div className="grid grid-cols-3 gap-x-20 gap-y-20">
-        {products.map((product) => {
-          return <ProductCard key={product.id} product={product} />;
-        })}
-      </div>
+
+      {products.length <= 0 ? (
+        <ShimmerUI
+          count={6}
+          gridClass={`grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6`}
+          cardClass="h-96"
+        />
+      ) : (
+        <div className="grid grid-cols-3 gap-x-20 gap-y-20">
+          {products.map((product) => {
+            return <ProductCard key={product.id} product={product} />;
+          })}
+        </div>
+      )}
       <Pagination />
     </div>
   );
 };
 export default ShopContent;
+
+// grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6
