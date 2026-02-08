@@ -34,7 +34,7 @@ AjX-Shop/
 │
 ├── src/
 │   ├── components/        # Reusable UI components (Card, Button, etc.)
-│   ├── context/             # Create a context API to avoid props drilling
+│   ├── context/           # Create a context API to avoid props drilling
 │   ├── pages/             # Page-level components (Shop, Product, Cart)
 │   ├── hooks/             # Custom React hooks (planned)
 │   ├── utils/             # Helper functions (constant data)
@@ -88,6 +88,8 @@ Each product contains:
 
 ✅ Products displayed as cards
 
+✅ Product details page displayed as cards
+
 ---
 
 ## 🧱 UI Components (Current)
@@ -108,8 +110,8 @@ Each product contains:
 
 - `/` → Home (optional)
 - `/shop` → Product listing page
-<!-- - `/product/:id` → Single product page
-- `/cart` → Cart page
+- `/shop/:id` → Single product page
+<!-- - `/cart` → Cart page
 - `/wishlist` → Wishlist page -->
 
 ---
@@ -121,10 +123,10 @@ Each product contains:
 - Filter products by:
   - Category
   - Price range
+  - Rating
 
 - Sort products by:
   - Price (Low → High, High → Low)
-  - Rating
 
 - Search products by title
 
@@ -145,7 +147,7 @@ Each product contains:
 
 - Full product details
 - Better layout & styling
-- Add to cart / wishlist buttons
+- Add to cart / wishlist button /Buy Now button
 
 ---
 

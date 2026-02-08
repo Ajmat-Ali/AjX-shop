@@ -3,26 +3,33 @@ import Pagination from "./Pagination";
 import ShimmerUI from "../ShimmerUI";
 import ProductCard from "./ProductCard";
 import { ProductsContext } from "../../context/createContext";
+import { Link } from "react-router";
 
 const ShopContent = () => {
-  const products = useContext(ProductsContext);
+  const { products, query, setQuery } = useContext(ProductsContext);
 
-  useState([]);
+  const handleChange = (e) => {
+    setQuery((pre) => ({ ...pre, [e.target.name]: e.target.value }));
+  };
 
   return (
-    <div className="flex-1 p-8">
+    <div className="flex-1 p-8 overflow-y-auto">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 ">
         <h1 className="text-2xl font-bold mb-4 sm:mb-0">All Products</h1>
 
         <div className="flex items-center gap-4">
           <div className="flex items-center">
             <span className="text-gray-600 mr-2">Sort by:</span>
-            <select className="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-              <option>Featured</option>
-              <option>Price: Low to High</option>
-              <option>Price: High to Low</option>
-              <option>Newest</option>
-              <option>Highest Rated</option>
+            <select
+              onChange={handleChange}
+              value={query.sortBy}
+              name="sortBy"
+              className="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            >
+              <option value={"new"}>Newest</option>
+              <option value={"asc"}>Price: Low to High</option>
+              <option value={"desc"}>Price: High to Low</option>
+              {/* <option>Highest Rated</option> */}
             </select>
           </div>
         </div>
@@ -37,7 +44,11 @@ const ShopContent = () => {
       ) : (
         <div className="grid grid-cols-3 gap-x-20 gap-y-20">
           {products.map((product) => {
-            return <ProductCard key={product.id} product={product} />;
+            return (
+              <Link to={`/shop/${product.id}`} key={product.id}>
+                <ProductCard product={product} />
+              </Link>
+            );
           })}
         </div>
       )}
@@ -46,5 +57,3 @@ const ShopContent = () => {
   );
 };
 export default ShopContent;
-
-// grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6

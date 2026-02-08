@@ -1,10 +1,15 @@
+import { IoSearchOutline } from "react-icons/io5";
+import { IoStar } from "react-icons/io5";
+import { CiStar } from "react-icons/ci";
+import { IoMdStarOutline } from "react-icons/io";
+
 const SideBar = () => {
   return (
-    <aside className="w-full md:w-64 flex-shrink-0">
-      <div className="bg-white p-6 rounded-xl shadow-sm sticky top-8">
+    <aside className="w-full md:w-64  h-screen">
+      <div className="bg-white p-6 rounded-xl shadow-sm  h-full overflow-y-auto">
         <h2 className="text-xl font-bold mb-6">Filters</h2>
 
-        <div className="mb-6">
+        <div className="mb-6 ">
           <h3 className="font-medium mb-3">Search</h3>
           <div className="relative">
             <input
@@ -12,10 +17,9 @@ const SideBar = () => {
               placeholder="Search products..."
               className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
-            <i
-              data-feather="search"
-              className="absolute left-3 top-3 text-gray-400 w-4 h-4"
-            ></i>
+            <span className="absolute left-3 top-3 text-gray-400 w-4 h-4">
+              <IoSearchOutline />
+            </span>
           </div>
         </div>
 
@@ -57,7 +61,7 @@ const SideBar = () => {
         </div>
 
         {/* <!-- Price Range --> */}
-        <div className="mb-6">
+        <div className="mb-6 ">
           <h3 className="font-medium mb-3">Price Range</h3>
           <div className="flex items-center justify-between mb-2">
             <span className="text-sm text-gray-600">$0</span>
@@ -79,11 +83,21 @@ const SideBar = () => {
               <input type="checkbox" id="rating-5" className="mr-2" />
               <label htmlFor="rating-5" className="flex items-center">
                 <div className="flex text-yellow-400">
-                  <i data-feather="star" className="w-4 h-4 fill-current"></i>
-                  <i data-feather="star" className="w-4 h-4 fill-current"></i>
-                  <i data-feather="star" className="w-4 h-4 fill-current"></i>
-                  <i data-feather="star" className="w-4 h-4 fill-current"></i>
-                  <i data-feather="star" className="w-4 h-4 fill-current"></i>
+                  <span className="w-4 h-4 fill-current">
+                    <IoStar className="" />
+                  </span>
+                  <span className="w-4 h-4 fill-current">
+                    <IoStar />
+                  </span>
+                  <span className="w-4 h-4 fill-current">
+                    <IoStar />
+                  </span>
+                  <span className="w-4 h-4 fill-current">
+                    <IoStar />
+                  </span>
+                  <span className="w-4 h-4 fill-current">
+                    <IoStar />
+                  </span>
                 </div>
               </label>
             </div>
@@ -91,11 +105,21 @@ const SideBar = () => {
               <input type="checkbox" id="rating-4" className="mr-2" />
               <label htmlFor="rating-4" className="flex items-center">
                 <div className="flex text-yellow-400">
-                  <i data-feather="star" className="w-4 h-4 fill-current"></i>
-                  <i data-feather="star" className="w-4 h-4 fill-current"></i>
-                  <i data-feather="star" className="w-4 h-4 fill-current"></i>
-                  <i data-feather="star" className="w-4 h-4 fill-current"></i>
-                  <i data-feather="star" className="w-4 h-4"></i>
+                  <span className="w-4 h-4 fill-current">
+                    <IoStar />
+                  </span>
+                  <span className="w-4 h-4 fill-current">
+                    <IoStar />
+                  </span>
+                  <span className="w-4 h-4 fill-current">
+                    <IoStar />
+                  </span>
+                  <span className="w-4 h-4 fill-current">
+                    <IoStar />
+                  </span>
+                  <span className="w-4 h-4">
+                    <IoMdStarOutline size={20} />
+                  </span>
                 </div>
                 <span className="text-gray-600 ml-1">& Up</span>
               </label>
@@ -104,11 +128,21 @@ const SideBar = () => {
               <input type="checkbox" id="rating-3" className="mr-2" />
               <label htmlFor="rating-3" className="flex items-center">
                 <div className="flex text-yellow-400">
-                  <i data-feather="star" className="w-4 h-4 fill-current"></i>
-                  <i data-feather="star" className="w-4 h-4 fill-current"></i>
-                  <i data-feather="star" className="w-4 h-4 fill-current"></i>
-                  <i data-feather="star" className="w-4 h-4"></i>
-                  <i data-feather="star" className="w-4 h-4"></i>
+                  <span className="w-4 h-4 fill-current">
+                    <IoStar />
+                  </span>
+                  <span className="w-4 h-4 fill-current">
+                    <IoStar />
+                  </span>
+                  <span className="w-4 h-4 fill-current">
+                    <IoStar />
+                  </span>
+                  <span className="w-4 h-4">
+                    <IoMdStarOutline size={20} />
+                  </span>
+                  <span className="w-4 h-4">
+                    <IoMdStarOutline size={20} />
+                  </span>
                 </div>
                 <span className="text-gray-600 ml-1">& Up</span>
               </label>
