@@ -4,9 +4,11 @@ import ShimmerUI from "../ShimmerUI";
 import ProductCard from "./ProductCard";
 import { ProductsContext } from "../../context/createContext";
 import { Link } from "react-router";
+import { ErrorPage } from "../ErrorPage";
 
 const ShopContent = () => {
-  const { products, query, setQuery } = useContext(ProductsContext);
+  const { products, query, setQuery, err, loader } =
+    useContext(ProductsContext);
 
   const handleChange = (e) => {
     setQuery((pre) => ({ ...pre, [e.target.name]: e.target.value }));
@@ -34,24 +36,34 @@ const ShopContent = () => {
           </div>
         </div>
       </div>
-
-      {products.length <= 0 ? (
+      {loader && (
         <ShimmerUI
           count={6}
           gridClass={`grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6`}
           cardClass="h-96"
         />
-      ) : (
-        <div className="grid grid-cols-3 gap-x-20 gap-y-20">
-          {products.map((product) => {
-            return (
-              <Link to={`/shop/${product.id}`} key={product.id}>
-                <ProductCard product={product} />
-              </Link>
-            );
-          })}
+      )}
+      {err && (
+        <ErrorPage
+          title={"Something went wrong"}
+          description={"Please try again later"}
+        />
+      )}
+      {products.length <= 0 && (
+        <div className="text-center font-bold text-red-600 text-2xl mt-6">
+          No Product Found
         </div>
       )}
+      <div className="grid grid-cols-3 gap-x-20 gap-y-20">
+        {products.map((product) => {
+          return (
+            <Link to={`/shop/${product.id}`} key={product.id}>
+              <ProductCard product={product} />
+            </Link>
+          );
+        })}
+      </div>
+
       <Pagination />
     </div>
   );

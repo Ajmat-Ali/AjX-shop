@@ -2,8 +2,17 @@ import { IoSearchOutline } from "react-icons/io5";
 import { IoStar } from "react-icons/io5";
 import { CiStar } from "react-icons/ci";
 import { IoMdStarOutline } from "react-icons/io";
+import { useContext } from "react";
+import { ProductsContext } from "../../context/createContext";
 
 const SideBar = () => {
+  const { query, setQuery } = useContext(ProductsContext);
+
+  const handleSearch = (e) => {
+    const { name, value } = e.target;
+    setQuery((pre) => ({ ...pre, [name]: value }));
+  };
+
   return (
     <aside className="w-full md:w-64  h-screen">
       <div className="bg-white p-6 rounded-xl shadow-sm  h-full overflow-y-auto">
@@ -14,6 +23,9 @@ const SideBar = () => {
           <div className="relative">
             <input
               type="text"
+              name="search"
+              value={query.search}
+              onChange={handleSearch}
               placeholder="Search products..."
               className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
@@ -28,34 +40,34 @@ const SideBar = () => {
           <h3 className="font-medium mb-3">Categories</h3>
           <ul className="space-y-2">
             <li>
-              <a href="#" className="text-indigo-600 hover:text-indigo-800">
+              <span href="#" className="text-indigo-600 hover:text-indigo-800">
                 All Categories
-              </a>
+              </span>
             </li>
             <li>
-              <a href="#" className="text-gray-600 hover:text-indigo-600">
+              <span href="#" className="text-gray-600 hover:text-indigo-600">
                 Electronics
-              </a>
+              </span>
             </li>
             <li>
-              <a href="#" className="text-gray-600 hover:text-indigo-600">
+              <span href="#" className="text-gray-600 hover:text-indigo-600">
                 Clothing
-              </a>
+              </span>
             </li>
             <li>
-              <a href="#" className="text-gray-600 hover:text-indigo-600">
+              <span href="#" className="text-gray-600 hover:text-indigo-600">
                 Home & Garden
-              </a>
+              </span>
             </li>
             <li>
-              <a href="#" className="text-gray-600 hover:text-indigo-600">
+              <span href="#" className="text-gray-600 hover:text-indigo-600">
                 Beauty
-              </a>
+              </span>
             </li>
             <li>
-              <a href="#" className="text-gray-600 hover:text-indigo-600">
+              <span href="#" className="text-gray-600 hover:text-indigo-600">
                 Sports
-              </a>
+              </span>
             </li>
           </ul>
         </div>
