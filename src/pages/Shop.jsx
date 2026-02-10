@@ -14,12 +14,33 @@ const Shop = () => {
     sortBy: "new",
     category: "all",
     search: "",
-    minRating: 0,
+    minRating: {
+      rating_5: false,
+      rating_4: false,
+      rating_3: false,
+    },
+    priceRange: {
+      min: 0,
+      max: 1000,
+    },
+  });
+
+  const [draftFilter, setDraftFilter] = useState({
+    rating: {
+      rating_5: false,
+      rating_4: false,
+      rating_3: false,
+    },
+    priceRange: {
+      min: 0,
+      max: 1000,
+    },
   });
 
   const debounceSearch = useDebounce(query.search, 1000);
 
   const getProducts = async (PRODUCTS_URL) => {
+    setLoader(true);
     try {
       const res = await fetch(PRODUCTS_URL);
       if (!res.ok) {
@@ -43,12 +64,39 @@ const Shop = () => {
   const sortedProducts = useMemo(() => {
     let result = [...products];
     const search = debounceSearch.trim().toLowerCase();
+    const category = query.category;
+    // ---------------------- Search ---------------
 
     if (search) {
       result = result.filter((product) => {
         return product.title.toLowerCase().includes(search);
       });
     }
+
+    // ---------------------- Category ---------------
+
+    if (category && category !== "all") {
+      result = result.filter((product) => {
+        return product.category === category;
+      });
+    }
+
+    // ---------------------- Rating ---------------
+
+    let min = 0;
+    const {
+      minRating: { rating_5, rating_4, rating_3 },
+    } = query;
+    if (rating_5) min = 5;
+    if (rating_4) min = 4;
+    if (rating_3) min = 3;
+
+    if (rating_5 || rating_4 || rating_3) {
+      result = result.filter((product) => product.rating.rate >= min);
+      // .sort((a, b) => a.rating.rate - b.rating.rate);
+    }
+
+    // ---------------------- Sort ---------------
 
     switch (query.sortBy) {
       case "asc":
@@ -61,7 +109,14 @@ const Shop = () => {
         break;
     }
     return result;
-  }, [products, query, debounceSearch]);
+  }, [products, query.sortBy, query.category, query.minRating, debounceSearch]);
+
+  // ---------------------------------------------//////-- Hanlde Apply Filter (Tomorrow Will be start. 11-02-2026) --///////////----------------------------
+  // const handleAppllyFilter = (e) => {
+  //   setQuery((pre) => {
+  //     ({ ...pre, });
+  //   });
+  // };
 
   // console.log(typeof query.search, query.search, query.search.length);
 
@@ -70,6 +125,8 @@ const Shop = () => {
     products: sortedProducts,
     query,
     setQuery,
+    draftFilter,
+    setDraftFilter,
     err,
     loader,
   };

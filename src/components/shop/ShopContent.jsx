@@ -17,7 +17,9 @@ const ShopContent = () => {
   return (
     <div className="flex-1 p-8 overflow-y-auto">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 ">
-        <h1 className="text-2xl font-bold mb-4 sm:mb-0">All Products</h1>
+        <h1 className="text-2xl font-bold mb-4 sm:mb-0">
+          {query.category.split(" ")[0]} Products
+        </h1>
 
         <div className="flex items-center gap-4">
           <div className="flex items-center">
@@ -49,11 +51,13 @@ const ShopContent = () => {
           description={"Please try again later"}
         />
       )}
+
       {products.length <= 0 && (
         <div className="text-center font-bold text-red-600 text-2xl mt-6">
           No Product Found
         </div>
       )}
+
       <div className="grid grid-cols-3 gap-x-20 gap-y-20">
         {products.map((product) => {
           return (
@@ -63,7 +67,6 @@ const ShopContent = () => {
           );
         })}
       </div>
-
       <Pagination />
     </div>
   );

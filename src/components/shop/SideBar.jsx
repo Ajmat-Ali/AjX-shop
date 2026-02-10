@@ -4,6 +4,7 @@ import { CiStar } from "react-icons/ci";
 import { IoMdStarOutline } from "react-icons/io";
 import { useContext } from "react";
 import { ProductsContext } from "../../context/createContext";
+import { FillStart } from "../FillStart";
 
 const SideBar = () => {
   const { query, setQuery } = useContext(ProductsContext);
@@ -11,6 +12,31 @@ const SideBar = () => {
   const handleSearch = (e) => {
     const { name, value } = e.target;
     setQuery((pre) => ({ ...pre, [name]: value }));
+  };
+
+  const handleCategory = (value) => {
+    setQuery((pre) => ({ ...pre, ["category"]: value }));
+  };
+
+  const handleRating = (e) => {
+    const { id, value, checked } = e.target;
+    setQuery((pre) => {
+      return {
+        ...pre,
+        minRating: {
+          ...pre.minRating,
+          [id]: checked,
+        },
+      };
+    });
+  };
+
+  const handleRange = (e) => {
+    const { value } = e.target;
+    setQuery((pre) => ({
+      ...pre,
+      priceRange: { ...pre.priceRange, ["max"]: Number(value) },
+    }));
   };
 
   return (
@@ -39,34 +65,49 @@ const SideBar = () => {
         <div className="mb-6">
           <h3 className="font-medium mb-3">Categories</h3>
           <ul className="space-y-2">
-            <li>
-              <span href="#" className="text-indigo-600 hover:text-indigo-800">
+            <li
+              onClick={() => {
+                handleCategory("all");
+              }}
+            >
+              <span className=" text-gray-600 hover:text-indigo-600">
                 All Categories
               </span>
             </li>
-            <li>
-              <span href="#" className="text-gray-600 hover:text-indigo-600">
+            <li
+              onClick={() => {
+                handleCategory("electronics");
+              }}
+            >
+              <span className="text-gray-600 hover:text-indigo-600">
                 Electronics
               </span>
             </li>
-            <li>
-              <span href="#" className="text-gray-600 hover:text-indigo-600">
-                Clothing
+            <li
+              onClick={() => {
+                handleCategory("men's clothing");
+              }}
+            >
+              <span className="text-gray-600 hover:text-indigo-600">
+                Men's clothing
               </span>
             </li>
-            <li>
-              <span href="#" className="text-gray-600 hover:text-indigo-600">
-                Home & Garden
+            <li
+              onClick={() => {
+                handleCategory("jewelery");
+              }}
+            >
+              <span className="text-gray-600 hover:text-indigo-600">
+                Jewelery
               </span>
             </li>
-            <li>
-              <span href="#" className="text-gray-600 hover:text-indigo-600">
-                Beauty
-              </span>
-            </li>
-            <li>
-              <span href="#" className="text-gray-600 hover:text-indigo-600">
-                Sports
+            <li
+              onClick={() => {
+                handleCategory("women's clothing");
+              }}
+            >
+              <span className="text-gray-600 hover:text-indigo-600">
+                Women's clothing
               </span>
             </li>
           </ul>
@@ -77,12 +118,14 @@ const SideBar = () => {
           <h3 className="font-medium mb-3">Price Range</h3>
           <div className="flex items-center justify-between mb-2">
             <span className="text-sm text-gray-600">$0</span>
-            <span className="text-sm text-gray-600">$500</span>
+            <span className="text-sm text-gray-600">$1000</span>
           </div>
           <input
             type="range"
             min="0"
             max="500"
+            value={query.priceRange.max}
+            onChange={handleRange}
             className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
           />
         </div>
@@ -92,43 +135,28 @@ const SideBar = () => {
           <h3 className="font-medium mb-3">Rating</h3>
           <div className="space-y-2">
             <div className="flex items-center">
-              <input type="checkbox" id="rating-5" className="mr-2" />
+              <input
+                onChange={handleRating}
+                type="checkbox"
+                id="rating_5"
+                className="mr-2"
+              />
               <label htmlFor="rating-5" className="flex items-center">
                 <div className="flex text-yellow-400">
-                  <span className="w-4 h-4 fill-current">
-                    <IoStar className="" />
-                  </span>
-                  <span className="w-4 h-4 fill-current">
-                    <IoStar />
-                  </span>
-                  <span className="w-4 h-4 fill-current">
-                    <IoStar />
-                  </span>
-                  <span className="w-4 h-4 fill-current">
-                    <IoStar />
-                  </span>
-                  <span className="w-4 h-4 fill-current">
-                    <IoStar />
-                  </span>
+                  <FillStart count={5} />
                 </div>
               </label>
             </div>
             <div className="flex items-center">
-              <input type="checkbox" id="rating-4" className="mr-2" />
+              <input
+                onChange={handleRating}
+                type="checkbox"
+                id="rating_4"
+                className="mr-2"
+              />
               <label htmlFor="rating-4" className="flex items-center">
                 <div className="flex text-yellow-400">
-                  <span className="w-4 h-4 fill-current">
-                    <IoStar />
-                  </span>
-                  <span className="w-4 h-4 fill-current">
-                    <IoStar />
-                  </span>
-                  <span className="w-4 h-4 fill-current">
-                    <IoStar />
-                  </span>
-                  <span className="w-4 h-4 fill-current">
-                    <IoStar />
-                  </span>
+                  <FillStart count={4} />
                   <span className="w-4 h-4">
                     <IoMdStarOutline size={20} />
                   </span>
@@ -137,18 +165,15 @@ const SideBar = () => {
               </label>
             </div>
             <div className="flex items-center">
-              <input type="checkbox" id="rating-3" className="mr-2" />
+              <input
+                onChange={handleRating}
+                type="checkbox"
+                id="rating_3"
+                className="mr-2"
+              />
               <label htmlFor="rating-3" className="flex items-center">
                 <div className="flex text-yellow-400">
-                  <span className="w-4 h-4 fill-current">
-                    <IoStar />
-                  </span>
-                  <span className="w-4 h-4 fill-current">
-                    <IoStar />
-                  </span>
-                  <span className="w-4 h-4 fill-current">
-                    <IoStar />
-                  </span>
+                  <FillStart count={3} />
                   <span className="w-4 h-4">
                     <IoMdStarOutline size={20} />
                   </span>
