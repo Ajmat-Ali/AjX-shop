@@ -26,7 +26,7 @@ const Shop = () => {
   });
 
   const [draftFilter, setDraftFilter] = useState({
-    rating: {
+    minRating: {
       rating_5: false,
       rating_4: false,
       rating_3: false,
@@ -60,9 +60,9 @@ const Shop = () => {
     getProducts(PRODUCTS_URL);
   }, []);
 
-  // ------------------------------------------ Sort & Filter Products ----------------------------------
+  // /////////----------------/////////////----------- Sort & Filter Products Using useMemo ---------------/////////--------------////////
   const sortedProducts = useMemo(() => {
-    let result = [...products];
+    let result = products;
     const search = debounceSearch.trim().toLowerCase();
     const category = query.category;
     // ---------------------- Search ---------------
@@ -93,32 +93,40 @@ const Shop = () => {
 
     if (rating_5 || rating_4 || rating_3) {
       result = result.filter((product) => product.rating.rate >= min);
-      // .sort((a, b) => a.rating.rate - b.rating.rate);
     }
 
     // ---------------------- Sort ---------------
 
     switch (query.sortBy) {
       case "asc":
-        result.sort((a, b) => a.price - b.price);
+        result = [...result].sort((a, b) => a.price - b.price);
         break;
       case "desc":
-        result.sort((a, b) => b.price - a.price);
+        result = [...result].sort((a, b) => b.price - a.price);
         break;
       default:
         break;
     }
     return result;
-  }, [products, query.sortBy, query.category, query.minRating, debounceSearch]);
+  }, [
+    products,
+    query.sortBy,
+    query.category,
+    query.minRating,
+    query.priceRange,
+    debounceSearch,
+  ]);
 
   // ---------------------------------------------//////-- Hanlde Apply Filter (Tomorrow Will be start. 11-02-2026) --///////////----------------------------
-  // const handleAppllyFilter = (e) => {
-  //   setQuery((pre) => {
-  //     ({ ...pre, });
-  //   });
-  // };
-
-  // console.log(typeof query.search, query.search, query.search.length);
+  const handleAppllyFilter = (e) => {
+    setQuery((pre) => {
+      return {
+        ...pre,
+        minRating: { ...pre.minRating, ...draftFilter.minRating },
+        priceRange: { ...pre.priceRange, ...draftFilter.priceRange },
+      };
+    });
+  };
 
   // -------------------------- Context API Value ------------------------------
   const value = {
@@ -129,6 +137,7 @@ const Shop = () => {
     setDraftFilter,
     err,
     loader,
+    handleAppllyFilter,
   };
 
   return (

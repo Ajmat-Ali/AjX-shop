@@ -7,7 +7,16 @@ import { ProductsContext } from "../../context/createContext";
 import { FillStart } from "../FillStart";
 
 const SideBar = () => {
-  const { query, setQuery } = useContext(ProductsContext);
+  const {
+    query,
+    setQuery,
+    draftFilter: {
+      minRating: { rating_5, rating_4, rating_3 },
+      priceRange: { min, max },
+    },
+    setDraftFilter,
+    handleAppllyFilter,
+  } = useContext(ProductsContext);
 
   const handleSearch = (e) => {
     const { name, value } = e.target;
@@ -20,7 +29,7 @@ const SideBar = () => {
 
   const handleRating = (e) => {
     const { id, value, checked } = e.target;
-    setQuery((pre) => {
+    setDraftFilter((pre) => {
       return {
         ...pre,
         minRating: {
@@ -33,7 +42,7 @@ const SideBar = () => {
 
   const handleRange = (e) => {
     const { value } = e.target;
-    setQuery((pre) => ({
+    setDraftFilter((pre) => ({
       ...pre,
       priceRange: { ...pre.priceRange, ["max"]: Number(value) },
     }));
@@ -118,13 +127,14 @@ const SideBar = () => {
           <h3 className="font-medium mb-3">Price Range</h3>
           <div className="flex items-center justify-between mb-2">
             <span className="text-sm text-gray-600">$0</span>
+            <span>{max}</span>
             <span className="text-sm text-gray-600">$1000</span>
           </div>
           <input
             type="range"
             min="0"
-            max="500"
-            value={query.priceRange.max}
+            max="1000"
+            value={max}
             onChange={handleRange}
             className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
           />
@@ -137,6 +147,7 @@ const SideBar = () => {
             <div className="flex items-center">
               <input
                 onChange={handleRating}
+                checked={rating_5}
                 type="checkbox"
                 id="rating_5"
                 className="mr-2"
@@ -150,6 +161,7 @@ const SideBar = () => {
             <div className="flex items-center">
               <input
                 onChange={handleRating}
+                checked={rating_4}
                 type="checkbox"
                 id="rating_4"
                 className="mr-2"
@@ -167,6 +179,7 @@ const SideBar = () => {
             <div className="flex items-center">
               <input
                 onChange={handleRating}
+                checked={rating_3}
                 type="checkbox"
                 id="rating_3"
                 className="mr-2"
@@ -187,7 +200,10 @@ const SideBar = () => {
           </div>
         </div>
 
-        <button className="w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700 transition">
+        <button
+          onClick={handleAppllyFilter}
+          className="w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700 transition"
+        >
           Apply Filters
         </button>
       </div>

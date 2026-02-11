@@ -1,4 +1,4 @@
-# AjX-Shop 🛒
+# AjX-Shop
 
 AjX-Shop is a **frontend-only e-commerce application** built for learning and practicing real-world frontend concepts using **React** and modern tooling. The project uses **FakeStore API** to display mock products and gradually evolves with features like filtering, sorting, cart, wishlist, and single product pages.
 
@@ -6,7 +6,7 @@ This README acts as a **living document**. As new features are added or architec
 
 ---
 
-## 🚀 Project Goals
+## Project Goals
 
 - Practice **real-world React patterns**
 - Understand **component-based architecture**
@@ -16,7 +16,7 @@ This README acts as a **living document**. As new features are added or architec
 
 ---
 
-## 🧰 Tech Stack
+## Tech Stack
 
 - **React** – UI library
 - **React DOM** – DOM rendering
@@ -27,7 +27,7 @@ This README acts as a **living document**. As new features are added or architec
 
 ---
 
-## 📁 Project Structure (Current)
+## Project Structure (Current)
 
 ```
 AjX-Shop/
@@ -36,7 +36,7 @@ AjX-Shop/
 │   ├── components/        # Reusable UI components (Card, Button, etc.)
 │   ├── context/           # Create a context API to avoid props drilling
 │   ├── pages/             # Page-level components (Shop, Product, Cart)
-│   ├── hooks/             # Custom React hooks (planned)
+│   ├── hooks/             # Custom React hooks
 │   ├── utils/             # Helper functions (constant data)
 │   ├── App.jsx            # Main app component
 │   ├── main.jsx           # Entry point
@@ -49,11 +49,11 @@ AjX-Shop/
 └── README.md
 ```
 
-> ⚠️ Structure may evolve as the project grows.
+> Structure may evolve as the project grows.
 
 ---
 
-## 📦 Data Source
+## Data Source
 
 - **API:** FakeStore API
 - **Endpoint Used:**
@@ -76,7 +76,7 @@ Each product contains:
 
 ---
 
-## 🖥️ Current Features
+## Current Features
 
 ✅ Project setup with Parcel + React
 
@@ -90,9 +90,11 @@ Each product contains:
 
 ✅ Product details page displayed as cards
 
+✅ Filter Products by: (search, sort, category, rating, price Range)
+
 ---
 
-## 🧱 UI Components (Current)
+## UI Components (Current)
 
 ### Product Card (Shop Page)
 
@@ -102,11 +104,11 @@ Each product contains:
 - Category
 - Rating
 
-> Clicking on a product will later navigate to a **Single Product Page**.
+> Clicking on a product will navigate to a **Single Product Page**.
 
 ---
 
-## 🧭 Routing (Planned / Partial)
+## Routing (Planned / Partial)
 
 - `/` → Home (optional)
 - `/shop` → Product listing page
@@ -116,9 +118,9 @@ Each product contains:
 
 ---
 
-## 🔜 Planned Features (Frontend Only)
+## Planned Features (Frontend Only)
 
-### 🧩 Core Features
+<!-- ### Core Features
 
 - Filter products by:
   - Category
@@ -128,9 +130,9 @@ Each product contains:
 - Sort products by:
   - Price (Low → High, High → Low)
 
-- Search products by title
+- Search products by title -->
 
-### 🛒 Cart
+### Cart
 
 - Add to cart
 - Remove from cart
@@ -138,12 +140,12 @@ Each product contains:
 - Cart total calculation
 - Persist cart using `localStorage`
 
-### ❤️ Wishlist
+### Wishlist
 
 - Add / remove products
 - Persist wishlist using `localStorage`
 
-### 📄 Single Product Page
+### Single Product Page
 
 - Full product details
 - Better layout & styling
@@ -151,7 +153,7 @@ Each product contains:
 
 ---
 
-## 🧠 State Management (Planned)
+## State Management (Planned)
 
 - React `useState` & `useEffect`
 - Context API for:
@@ -162,7 +164,7 @@ Each product contains:
 
 ---
 
-## 🎨 Styling
+## Styling
 
 - Tailwind CSS utility classes
 - Mobile-first responsive design
@@ -170,7 +172,7 @@ Each product contains:
 
 ---
 
-## 🧪 Testing (Future Scope)
+## Testing (Future Scope)
 
 - Manual UI testing
 - Possible introduction to:
@@ -179,7 +181,7 @@ Each product contains:
 
 ---
 
-## 📌 Notes for Future Me
+## Notes for Future Me
 
 - Keep components **small and reusable**
 - Avoid prop drilling where possible
@@ -192,13 +194,13 @@ Each product contains:
 
 ---
 
-## 📈 Project Status
+## Project Status
 
-🟡 **In Progress** – Actively being developed and improved
+**In Progress** – Actively being developed and improved
 
 ---
 
-## 🧑‍💻 Author
+## Author
 
 **Ajmat Ali**
 Frontend / Full‑Stack (MERN) Learner & Freelancer Aspirant
