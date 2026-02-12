@@ -128,6 +128,8 @@ const Shop = () => {
     });
   };
 
+  const addTOCart = (product) => {};
+
   // -------------------------- Context API Value ------------------------------
   const value = {
     products: sortedProducts,
@@ -138,6 +140,7 @@ const Shop = () => {
     err,
     loader,
     handleAppllyFilter,
+    addTOCart,
   };
 
   return (

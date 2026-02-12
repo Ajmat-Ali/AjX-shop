@@ -1,9 +1,8 @@
 import React, { useContext } from "react";
 import { ProductsContext } from "../../context/createContext";
 
-const ProductCard = ({
-  product: { category, description, image, price, rating, title, id },
-}) => {
+const ProductCard = ({ product }) => {
+  const { category, description, image, price, rating, title, id } = product;
   return (
     <div
       onClick={() => {}}

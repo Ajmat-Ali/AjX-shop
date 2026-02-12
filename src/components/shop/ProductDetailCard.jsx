@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { PRODUCTS_URL } from "../../utils/constant";
 import { Link, useParams } from "react-router";
 import ShimmerUI from "../ShimmerUI";
 import { ErrorPage } from "../ErrorPage";
+import { CartContext } from "../../context/createContext";
 
 export const ProductDetailCard = () => {
   const { productId } = useParams();
@@ -10,6 +11,8 @@ export const ProductDetailCard = () => {
   const [loader, setLoader] = useState(true);
   const [error, setError] = useState({ errorData: "", flag: false });
   const [imageLoaded, setImageLoaded] = useState(false);
+
+  const { addToCart } = useContext(CartContext);
 
   const fetchSingleProduct = async (PRODUCTS_URL) => {
     try {
@@ -120,8 +123,11 @@ export const ProductDetailCard = () => {
             <span className="text-sm text-gray-500">({count} reviews)</span>
           </div>
 
-          <div className="border-t pt-6 space-y-4">
-            <button className="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-xl text-lg font-semibold transition cursor-pointer">
+          <div className="border-t pt-6 space-y-4 ">
+            <button
+              onClick={() => addToCart(singleProduct)}
+              className="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-xl text-lg font-semibold transition cursor-pointer"
+            >
               Add to Cart
             </button>
             <button className="w-full border border-indigo-600 text-indigo-600 hover:bg-indigo-50 py-3 rounded-xl text-lg font-semibold transition cursor-pointer">

@@ -1,8 +1,18 @@
- const Hero = () =>{
-    return <div className="bg-linear-to-bl from-fuchsia-700 to-violet-700 text-gray-300 p-4 flex flex-col items-start justify-center gap-y-1 mt-5 rounded-md">
-        <h1 className="text-3xl ">New Collection</h1>
-        <p>Up to 30% off on trending electronics and fashion</p>
-        <button className="bg-gray-200 text-gray-900 text-sm py-1 px-4 text-center cursor-pointer rounded-md mt-3">Shop Now</button>
+import { useContext } from "react";
+import { CartContext } from "../../context/createContext";
+
+const Hero = () => {
+  const { cartCount } = useContext(CartContext);
+  console.log(cartCount);
+
+  return (
+    <div className="bg-linear-to-bl from-fuchsia-700 to-violet-700 text-gray-300 p-4 flex flex-col items-start justify-center gap-y-1 mt-5 rounded-md">
+      <h1 className="text-3xl ">New Collection</h1>
+      <p>Up to 30% off on trending electronics and fashion</p>
+      <button className="bg-gray-200 text-gray-900 text-sm py-1 px-4 text-center cursor-pointer rounded-md mt-3">
+        Shop Now
+      </button>
     </div>
-}
-export default Hero
+  );
+};
+export default Hero;

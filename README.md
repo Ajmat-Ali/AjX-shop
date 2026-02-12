@@ -134,7 +134,7 @@ Each product contains:
 
 ### Cart
 
-- Add to cart
+- Add to cart (Done)
 - Remove from cart
 - Increase / decrease quantity
 - Cart total calculation
