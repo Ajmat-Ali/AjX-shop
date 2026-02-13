@@ -3,6 +3,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa6";
 import { IoPersonCircleSharp } from "react-icons/io5";
 import { IoPersonCircle } from "react-icons/io5";
+import { Link, NavLink } from "react-router";
 
 export default function Header({ auth, setAuth }) {
   const handleLogin = () => {
@@ -18,9 +19,25 @@ export default function Header({ auth, setAuth }) {
         </div>
         <nav className="border border-4 border-red-900">
           <ul className="flex items-center text-gray-600 gap-x-6 text-md p-2">
-            <li className="cursor-pointer">Home</li>
             <li className="cursor-pointer">
-              <FaShoppingCart size={20} />
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  isActive ? "text-blue-500 font-semibold" : "text-gray-600"
+                }
+              >
+                Home
+              </NavLink>
+            </li>
+            <li className="cursor-pointer">
+              <NavLink
+                to="/cart"
+                className={({ isActive }) =>
+                  isActive ? "text-blue-500 font-semibold" : "text-gray-600"
+                }
+              >
+                <FaShoppingCart size={20} />
+              </NavLink>
             </li>
             <li className="cursor-pointer">
               <FaHeart size={20} />

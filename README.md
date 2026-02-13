@@ -88,9 +88,21 @@ Each product contains:
 
 ✅ Products displayed as cards
 
-✅ Product details page displayed as cards
-
 ✅ Filter Products by: (search, sort, category, rating, price Range)
+
+### ✅ Single Product Page
+
+- ✅ Full product details
+- ✅ Better layout & styling
+- ✅ Add to cart / wishlist button /Buy Now button
+
+### ✅ Cart Page
+
+- ✅ Add to cart
+- ✅ Remove from cart
+- ✅ Increase / decrease quantity
+- ✅ Cart total calculation
+- ✅ Persist cart using `localStorage`
 
 ---
 
@@ -132,24 +144,24 @@ Each product contains:
 
 - Search products by title -->
 
-### Cart
+<!-- ### Cart
 
 - Add to cart (Done)
 - Remove from cart
 - Increase / decrease quantity
 - Cart total calculation
-- Persist cart using `localStorage`
+- Persist cart using `localStorage` -->
 
 ### Wishlist
 
 - Add / remove products
 - Persist wishlist using `localStorage`
 
-### Single Product Page
+<!-- ### Single Product Page
 
 - Full product details
 - Better layout & styling
-- Add to cart / wishlist button /Buy Now button
+- Add to cart / wishlist button /Buy Now button -->
 
 ---
 

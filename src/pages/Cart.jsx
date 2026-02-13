@@ -5,47 +5,66 @@ import { ShimmerCart } from "../components/cart/ShimmerCart";
 import { Card } from "../components/cart/Card";
 
 const Cart = () => {
-  const { cart } = useContext(CartContext);
+  const {
+    cart,
+    cartState: { cartCount, totalPrice },
+    addToCart,
+    removeFromCart,
+    decreaseQty,
+  } = useContext(CartContext);
 
-  // Empty cart UI
-
+  // Empty Cart
   if (cart.length === 0) {
     return <ShimmerCart />;
   }
 
-  return (
-    <div className="px-4 py-6 md:px-8">
-      <h1 className="text-2xl font-semibold mb-6">Your Cart</h1>
+  // // const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
+  // const t = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  // console.log(t);
 
-      {/* Layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Cart Items */}
-        <div className="lg:col-span-2 space-y-4">
+  return (
+    <div className="px-4 md:px-10 py-8">
+      <h1 className="text-3xl font-semibold mb-8">Shopping Cart</h1>
+
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {/* LEFT: Cart Items */}
+        <div className="lg:col-span-2 space-y-6">
           {cart.map((item) => (
-            <Card key={item.id} item={item} />
+            <Card
+              key={item.id}
+              item={item}
+              addToCart={addToCart}
+              decreaseQty={decreaseQty}
+              removeFromCart={removeFromCart}
+            />
           ))}
         </div>
 
-        {/* Summary */}
-        <div className="border rounded-xl p-5 bg-white h-fit">
-          <h2 className="text-lg font-semibold mb-4">Order Summary</h2>
+        {/* RIGHT: Summary */}
+        <div className="border rounded-2xl p-6 bg-white h-fit">
+          <h2 className="text-xl font-semibold mb-6">Order Summary</h2>
 
-          <div className="flex justify-between text-sm mb-2">
+          <div className="flex justify-between text-sm mb-3">
             <span>Total Items</span>
-            <span>{cart.reduce((acc, item) => acc + item.quantity, 0)}</span>
+            <span>{cartCount}</span>
           </div>
 
-          <div className="flex justify-between text-sm mb-4">
-            <span>Total Price</span>
-            <span className="font-medium">
-              ₹
-              {cart
-                .reduce((acc, item) => acc + item.price * item.quantity, 0)
-                .toFixed(2)}
-            </span>
+          <div className="flex justify-between text-sm mb-3">
+            <span>Subtotal</span>
+            <span>₹{totalPrice.toFixed(2)}</span>
           </div>
 
-          <button className="w-full py-3 bg-black text-white rounded-lg hover:bg-gray-800 transition">
+          <div className="flex justify-between text-sm mb-6">
+            <span>Delivery</span>
+            <span className="text-green-600">FREE</span>
+          </div>
+
+          <div className="border-t pt-4 flex justify-between font-semibold text-lg mb-6">
+            <span>Total</span>
+            <span>₹{totalPrice.toFixed(2)}</span>
+          </div>
+
+          <button className="w-full py-3 bg-black text-white rounded-xl hover:bg-gray-800 transition">
             Proceed to Checkout
           </button>
         </div>
@@ -53,5 +72,4 @@ const Cart = () => {
     </div>
   );
 };
-
 export default Cart;

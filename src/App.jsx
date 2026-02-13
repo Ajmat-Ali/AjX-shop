@@ -1,7 +1,7 @@
+// import { Home } from "./pages/Home";
+// import Shop from "./pages/Shop";
 import { useEffect, useMemo, useState } from "react";
-import { Home } from "./pages/Home";
 import Header from "./components/Header";
-import Shop from "./pages/Shop";
 import { Outlet } from "react-router";
 import { CartContext } from "./context/createContext";
 
@@ -11,20 +11,15 @@ export default function App() {
 
   useEffect(() => {
     const savedCart = localStorage.getItem("cart");
-    // console.log("1st UseEffect", savedCart);
-
     if (savedCart) {
       setCart(JSON.parse(savedCart));
-      // console.log("Inside 1st useEffect Condition >>>>>>>", cart);
     }
   }, []);
 
   useEffect(() => {
-    // console.log("2nd useEffect");
     localStorage.setItem("cart", JSON.stringify(cart));
-    // console.log("2nd After set to local Storage", cart);
   }, [cart]);
-  // console.log("App.jsx ------------", cart, Date.now());
+
   /////////////////////////////////////////// ------- addToCart ---------- //////////////////////////////////////////
   const addToCart = (product) => {
     setCart((prevCart) => {
@@ -40,18 +35,52 @@ export default function App() {
       }
     });
   };
+  /////////////////////////////////////////// ------- decreaseQty ---------- //////////////////////////////////////////
+  const decreaseQty = (id) => {
+    setCart((prevCart) => {
+      return prevCart
+        .filter((item) => {
+          if (item.id === id) {
+            if (item.quantity <= 1) {
+              return false;
+            } else {
+              return true;
+            }
+          } else {
+            return true;
+          }
+        })
+        .map((item) =>
+          item.id === id ? { ...item, quantity: item.quantity - 1 } : item,
+        );
+    });
+  };
+  /////////////////////////////////////////// ------- removeFromCart ---------- //////////////////////////////////////////
+  const removeFromCart = (id) => {
+    setCart((prevCart) => {
+      return prevCart.filter((item) => item.id !== id);
+    });
+  };
 
-  ///////////////////////////////////// ------------- useMemo for calculating total quantity ------------------------------
-  const cartCount = useMemo(() => {
-    return cart.reduce((acc, curr) => {
-      return (acc += curr.quantity);
+  ///////////////////////////////////// ------------- useMemo for calculating totalQuantity (cartCount) and totalPrice ------------------------------
+  const cartState = useMemo(() => {
+    const cartCount = cart.reduce((acc, item) => {
+      return (acc += item.quantity);
     }, 0);
+    const totalPrice = cart.reduce((acc, item) => {
+      return acc + item.price * item.quantity;
+    }, 0);
+
+    return { cartCount, totalPrice };
   }, [cart]);
 
+  /////////////////////////////////// ------------Context API Value-------------- ///////////////////////////////////
   const value = {
     cart,
     addToCart,
-    cartCount,
+    decreaseQty,
+    removeFromCart,
+    cartState,
   };
 
   return (

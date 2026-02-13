@@ -3,10 +3,10 @@ import { Link } from "react-router";
 
 export const ShimmerCart = () => {
   return (
-    <div className="min-h-[60vh] flex flex-col items-center justify-center text-center px-4">
-      <h2 className="text-2xl font-semibold mb-2">Your cart is empty 🛒</h2>
+    <div className="min-h-[70vh] flex flex-col items-center justify-center text-center px-4">
+      <h2 className="text-3xl font-semibold mb-2">Your cart is empty 🛒</h2>
       <p className="text-gray-500 mb-6">
-        Looks like you haven’t added anything yet.
+        Browse products and add them to your cart.
       </p>
       <Link
         to="/shop"
