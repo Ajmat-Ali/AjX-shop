@@ -167,7 +167,7 @@ Each product contains:
 
 ## State Management (Planned)
 
-- React `useState` & `useEffect`
+- React `useState` , `useEffect`, & `useMemo`
 - Context API for:
   - Cart state
   - Wishlist state
@@ -184,14 +184,14 @@ Each product contains:
 
 ---
 
-## Testing (Future Scope)
+<!-- ## Testing (Future Scope)
 
 - Manual UI testing
 - Possible introduction to:
   - React Testing Library
   - Jest (optional)
 
----
+--- -->
 
 ## Notes for Future Me
 

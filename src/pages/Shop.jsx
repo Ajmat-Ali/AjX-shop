@@ -4,11 +4,10 @@ import { useEffect, useMemo, useState } from "react";
 import { PRODUCTS_URL } from "../utils/constant";
 import { ProductsContext } from "../context/createContext";
 import { useDebounce } from "../hook/useDebounce";
+import useFetch from "../hook/useFetch";
 
 const Shop = () => {
-  const [products, setProducts] = useState([]);
-  const [loader, setLoader] = useState(true);
-  const [err, setErr] = useState(false);
+  const { err, loader, products } = useFetch(PRODUCTS_URL);
 
   const [query, setQuery] = useState({
     sortBy: "new",
@@ -38,27 +37,6 @@ const Shop = () => {
   });
 
   const debounceSearch = useDebounce(query.search, 1000);
-
-  const getProducts = async (PRODUCTS_URL) => {
-    setLoader(true);
-    try {
-      const res = await fetch(PRODUCTS_URL);
-      if (!res.ok) {
-        throw new Error("SERVER_ERROR");
-      }
-      const data = await res.json();
-      setProducts(data);
-      setLoader(false);
-      setErr(false);
-    } catch (error) {
-      setErr(true);
-      setLoader(false);
-    }
-  };
-
-  useEffect(() => {
-    getProducts(PRODUCTS_URL);
-  }, []);
 
   // /////////----------------/////////////----------- Sort & Filter Products Using useMemo ---------------/////////--------------////////
   const sortedProducts = useMemo(() => {

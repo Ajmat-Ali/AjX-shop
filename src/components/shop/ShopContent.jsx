@@ -14,6 +14,39 @@ const ShopContent = () => {
     setQuery((pre) => ({ ...pre, [e.target.name]: e.target.value }));
   };
 
+  if (loader) {
+    return (
+      <div className="flex-1 p-8 overflow-y-auto">
+        <ShimmerUI
+          count={6}
+          gridClass={`grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6`}
+          cardClass="h-96"
+        />
+      </div>
+    );
+  }
+
+  if (err) {
+    return (
+      <div className="flex-1 p-8 overflow-y-auto">
+        <ErrorPage
+          title={"Something went wrong"}
+          description={"Please try again later"}
+        />
+      </div>
+    );
+  }
+
+  if (products.length <= 0) {
+    return (
+      <div className="flex-1 p-8 overflow-y-auto">
+        <div className="text-center font-bold text-red-600 text-2xl mt-6">
+          No Product Found
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex-1 p-8 overflow-y-auto">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 ">
@@ -38,25 +71,7 @@ const ShopContent = () => {
           </div>
         </div>
       </div>
-      {loader && (
-        <ShimmerUI
-          count={6}
-          gridClass={`grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6`}
-          cardClass="h-96"
-        />
-      )}
-      {err && (
-        <ErrorPage
-          title={"Something went wrong"}
-          description={"Please try again later"}
-        />
-      )}
-
-      {products.length <= 0 && (
-        <div className="text-center font-bold text-red-600 text-2xl mt-6">
-          No Product Found
-        </div>
-      )}
+      {/*  */}
 
       <div className="grid grid-cols-3 gap-x-20 gap-y-20">
         {products.map((product) => {

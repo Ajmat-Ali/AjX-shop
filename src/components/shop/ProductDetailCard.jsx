@@ -4,38 +4,16 @@ import { Link, useParams } from "react-router";
 import ShimmerUI from "../ShimmerUI";
 import { ErrorPage } from "../ErrorPage";
 import { CartContext } from "../../context/createContext";
+import useFetch from "../../hook/useFetch";
 
 export const ProductDetailCard = () => {
   const { productId } = useParams();
-  const [singleProduct, setSingleProduct] = useState(null);
-  const [loader, setLoader] = useState(true);
-  const [error, setError] = useState({ errorData: "", flag: false });
   const [imageLoaded, setImageLoaded] = useState(false);
+  const URL = `${PRODUCTS_URL}/${productId}`;
+
+  const { loader, err, products: singleProduct } = useFetch(URL);
 
   const { addToCart } = useContext(CartContext);
-
-  const fetchSingleProduct = async (PRODUCTS_URL) => {
-    try {
-      const res = await fetch(`${PRODUCTS_URL}/${productId}`);
-      if (res.status === 404) {
-        throw new Error("NOT_FOUND");
-      }
-      if (!res.ok) {
-        throw new Error("SERVER_ERROR");
-      }
-      const json = await res.json();
-      setSingleProduct(json);
-      setLoader(false);
-      setError({ flag: false, errorData: true });
-    } catch (err) {
-      setError({ flag: true, errorData: err.message });
-      setLoader(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchSingleProduct(PRODUCTS_URL);
-  }, [productId]);
 
   if (loader) {
     return (
@@ -48,15 +26,7 @@ export const ProductDetailCard = () => {
     );
   }
 
-  if (error.flag) {
-    if (error.errorData === "NOT_FOUND") {
-      return (
-        <ErrorPage
-          title="Product Not Found"
-          description="This product does not exist or was removed."
-        />
-      );
-    }
+  if (err) {
     return (
       <ErrorPage
         title="Something went wrong"
@@ -78,14 +48,12 @@ export const ProductDetailCard = () => {
     <div className="max-w-6xl mx-auto bg-white rounded-3xl shadow-xl overflow-hidden">
       <div className="grid grid-cols-1 md:grid-cols-2">
         <div className="bg-gray-100 p-8 flex items-center justify-center relative">
-          {/* Skeleton Loader */}
           {!imageLoaded && (
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="w-full h-full bg-gray-200 animate-pulse rounded-none" />
             </div>
           )}
 
-          {/* Actual Image */}
           <img
             src={image}
             alt={title}
@@ -96,7 +64,6 @@ export const ProductDetailCard = () => {
           />
         </div>
 
-        {/* Details Section */}
         <div className="p-8 space-y-6 ">
           <div>
             <Link to={"/shop"}>
