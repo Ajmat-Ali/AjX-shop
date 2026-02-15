@@ -9,22 +9,34 @@ import { FillStart } from "../FillStart";
 const SideBar = () => {
   const {
     query,
-    setQuery,
+    dispatch,
     draftFilter: {
       minRating: { rating_5, rating_4, rating_3 },
       priceRange: { min, max },
     },
     setDraftFilter,
-    handleAppllyFilter,
+    handleApplyFilter,
   } = useContext(ProductsContext);
 
   const handleSearch = (e) => {
     const { name, value } = e.target;
-    setQuery((pre) => ({ ...pre, [name]: value }));
+    dispatch({
+      type: "SEARCH",
+      data: {
+        key: name,
+        value: value,
+      },
+    });
   };
 
   const handleCategory = (value) => {
-    setQuery((pre) => ({ ...pre, ["category"]: value }));
+    dispatch({
+      type: "CATEGORY",
+      data: {
+        key: "category",
+        value: value,
+      },
+    });
   };
 
   const handleRating = (e) => {
@@ -201,7 +213,7 @@ const SideBar = () => {
         </div>
 
         <button
-          onClick={handleAppllyFilter}
+          onClick={handleApplyFilter}
           className="w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700 transition"
         >
           Apply Filters

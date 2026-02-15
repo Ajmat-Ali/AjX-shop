@@ -10,9 +10,7 @@ export const ProductDetailCard = () => {
   const { productId } = useParams();
   const [imageLoaded, setImageLoaded] = useState(false);
   const URL = `${PRODUCTS_URL}/${productId}`;
-
   const { loader, err, products: singleProduct } = useFetch(URL);
-
   const { addToCart } = useContext(CartContext);
 
   if (loader) {

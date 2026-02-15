@@ -7,11 +7,18 @@ import { Link } from "react-router";
 import { ErrorPage } from "../ErrorPage";
 
 const ShopContent = () => {
-  const { products, query, setQuery, err, loader } =
+  const { products, query, dispatch, err, loader } =
     useContext(ProductsContext);
 
   const handleChange = (e) => {
-    setQuery((pre) => ({ ...pre, [e.target.name]: e.target.value }));
+    const { name, value } = e.target;
+    dispatch({
+      type: "SORTBY",
+      data: {
+        key: name,
+        value: value,
+      },
+    });
   };
 
   if (loader) {

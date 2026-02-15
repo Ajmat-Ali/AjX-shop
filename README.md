@@ -35,11 +35,13 @@ AjX-Shop/
 ├── src/
 │   ├── components/        # Reusable UI components (Card, Button, etc.)
 │   ├── context/           # Create a context API to avoid props drilling
-│   ├── pages/             # Page-level components (Shop, Product, Cart)
+│   ├── pages/             # Page-level components (Home, Shop, Cart)
 │   ├── hooks/             # Custom React hooks
-│   ├── utils/             # Helper functions (constant data)
+│   ├── utils/             # Helper functions (constant data, reducer)
+│   ├── route/             # All Route t move any particular url
 │   ├── App.jsx            # Main app component
-│   ├── main.jsx           # Entry point
+|
+├── main.js                # Entry point
 │
 ├── public/
 ├── index.html

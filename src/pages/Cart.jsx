@@ -13,21 +13,16 @@ const Cart = () => {
     decreaseQty,
   } = useContext(CartContext);
 
-  // Empty Cart
   if (cart.length === 0) {
     return <ShimmerCart />;
   }
-
-  // // const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
-  // const t = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
-  // console.log(t);
 
   return (
     <div className="px-4 md:px-10 py-8">
       <h1 className="text-3xl font-semibold mb-8">Shopping Cart</h1>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* LEFT: Cart Items */}
+        {/*------------------- LEFT: Cart Items ---------------------------*/}
         <div className="lg:col-span-2 space-y-6">
           {cart.map((item) => (
             <Card
@@ -40,7 +35,7 @@ const Cart = () => {
           ))}
         </div>
 
-        {/* RIGHT: Summary */}
+        {/*--------------------------- RIGHT: Summary ---------------------------*/}
         <div className="border rounded-2xl p-6 bg-white h-fit">
           <h2 className="text-xl font-semibold mb-6">Order Summary</h2>
 

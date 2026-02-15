@@ -1,28 +1,16 @@
 import SideBar from "../components/shop/SideBar";
 import ShopContent from "../components/shop/ShopContent";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useReducer } from "react";
 import { PRODUCTS_URL } from "../utils/constant";
 import { ProductsContext } from "../context/createContext";
 import { useDebounce } from "../hook/useDebounce";
 import useFetch from "../hook/useFetch";
+import { initialQuery, filterReducer } from "../utils/filterReducer";
+import { useFilteredProducts } from "../hook/useFilteredProducts";
 
 const Shop = () => {
   const { err, loader, products } = useFetch(PRODUCTS_URL);
-
-  const [query, setQuery] = useState({
-    sortBy: "new",
-    category: "all",
-    search: "",
-    minRating: {
-      rating_5: false,
-      rating_4: false,
-      rating_3: false,
-    },
-    priceRange: {
-      min: 0,
-      max: 1000,
-    },
-  });
+  const [query, dispatch] = useReducer(filterReducer, initialQuery);
 
   const [draftFilter, setDraftFilter] = useState({
     minRating: {
@@ -37,88 +25,28 @@ const Shop = () => {
   });
 
   const debounceSearch = useDebounce(query.search, 1000);
+  const sortedProducts = useFilteredProducts(products, query, debounceSearch);
 
-  // /////////----------------/////////////----------- Sort & Filter Products Using useMemo ---------------/////////--------------////////
-  const sortedProducts = useMemo(() => {
-    let result = products;
-    const search = debounceSearch.trim().toLowerCase();
-    const category = query.category;
-    // ---------------------- Search ---------------
-
-    if (search) {
-      result = result.filter((product) => {
-        return product.title.toLowerCase().includes(search);
-      });
-    }
-
-    // ---------------------- Category ---------------
-
-    if (category && category !== "all") {
-      result = result.filter((product) => {
-        return product.category === category;
-      });
-    }
-
-    // ---------------------- Rating ---------------
-
-    let min = 0;
-    const {
-      minRating: { rating_5, rating_4, rating_3 },
-    } = query;
-    if (rating_5) min = 5;
-    if (rating_4) min = 4;
-    if (rating_3) min = 3;
-
-    if (rating_5 || rating_4 || rating_3) {
-      result = result.filter((product) => product.rating.rate >= min);
-    }
-
-    // ---------------------- Sort ---------------
-
-    switch (query.sortBy) {
-      case "asc":
-        result = [...result].sort((a, b) => a.price - b.price);
-        break;
-      case "desc":
-        result = [...result].sort((a, b) => b.price - a.price);
-        break;
-      default:
-        break;
-    }
-    return result;
-  }, [
-    products,
-    query.sortBy,
-    query.category,
-    query.minRating,
-    query.priceRange,
-    debounceSearch,
-  ]);
-
-  // ---------------------------------------------//////-- Hanlde Apply Filter (Tomorrow Will be start. 11-02-2026) --///////////----------------------------
-  const handleAppllyFilter = (e) => {
-    setQuery((pre) => {
-      return {
-        ...pre,
-        minRating: { ...pre.minRating, ...draftFilter.minRating },
-        priceRange: { ...pre.priceRange, ...draftFilter.priceRange },
-      };
+  const handleApplyFilter = (e) => {
+    dispatch({
+      type: "APPLYFILTER",
+      data: {
+        key: "applyFilter",
+        value: draftFilter,
+      },
     });
   };
-
-  const addTOCart = (product) => {};
 
   // -------------------------- Context API Value ------------------------------
   const value = {
     products: sortedProducts,
     query,
-    setQuery,
+    dispatch,
     draftFilter,
     setDraftFilter,
     err,
     loader,
-    handleAppllyFilter,
-    addTOCart,
+    handleApplyFilter,
   };
 
   return (
