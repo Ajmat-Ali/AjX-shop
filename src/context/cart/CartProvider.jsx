@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
+import { CartContext } from "./cartContext";
 
-export const useCart = () => {
+const CartProvider = ({ children }) => {
   const [cart, setCart] = useState(
     () => JSON.parse(localStorage.getItem("cart")) || [],
   );
@@ -65,5 +66,17 @@ export const useCart = () => {
     return { cartCount, totalPrice };
   }, [cart]);
 
-  return { cart, addToCart, decreaseQty, removeFromCart, cartState };
+  const cartValue = {
+    cart,
+    addToCart,
+    decreaseQty,
+    removeFromCart,
+    cartState,
+  };
+
+  return (
+    <CartContext.Provider value={cartValue}>{children}</CartContext.Provider>
+  );
 };
+
+export default CartProvider;

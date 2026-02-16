@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { CartContext } from "../context/createContext";
+import { CartContext } from "../context/cart/cartContext";
 import { Link } from "react-router";
-import { ShimmerCart } from "../components/cart/ShimmerCart";
-import { Card } from "../components/cart/Card";
+import { ShimmerCart } from "../components/cartComponent/ShimmerCart";
+import { Card } from "../components/cartComponent/Card";
 
 const Cart = () => {
   const {
@@ -13,7 +13,7 @@ const Cart = () => {
     decreaseQty,
   } = useContext(CartContext);
 
-  if (cart.length === 0) {
+  if (cart.length <= 0) {
     return <ShimmerCart />;
   }
 

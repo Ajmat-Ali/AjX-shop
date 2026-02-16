@@ -1,27 +1,35 @@
 import { useEffect, useMemo, useState } from "react";
 import Header from "./components/Header";
 import { Outlet } from "react-router";
-import { CartContext } from "./context/createContext";
-import { useCart } from "./hook/useCart";
-export default function App() {
-  const { cart, addToCart, decreaseQty, removeFromCart, cartState } = useCart();
+import CartProvider from "./context/cart/CartProvider";
 
-  /////////////////////////////////// ------------Context API Value-------------- ///////////////////////////////////
-  const value = {
-    cart,
-    addToCart,
-    decreaseQty,
-    removeFromCart,
-    cartState,
-  };
+export default function App() {
+  // const [wishlist, setWishlist] = useState(
+  //   () => JSON.parse(localStorage.getItem("wishlist")) || [],
+  // );
+
+  // useEffect(() => {
+  //   localStorage.setItem("wishlist", JSON.stringify(wishlist));
+  // }, [wishlist]);
+
+  // const addToWishlist = (product) => {
+  //   setWishlist((prev) => {
+  //     const existingProduct = prev.find((item) => item.id === product.id);
+  //     if (existingProduct) {
+  //       // call remove function
+  //       return;
+  //     }
+  //     return [...prev, { ...product }];
+  //   });
+  // };
 
   return (
     <>
       <div className="bg-gray-50 w-11/12 m-auto mt-1 rounded-xl ">
-        <CartContext.Provider value={value}>
+        <CartProvider>
           <Header />
           <Outlet />
-        </CartContext.Provider>
+        </CartProvider>
       </div>
     </>
   );

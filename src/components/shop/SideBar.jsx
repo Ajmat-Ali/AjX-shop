@@ -3,7 +3,7 @@ import { IoStar } from "react-icons/io5";
 import { CiStar } from "react-icons/ci";
 import { IoMdStarOutline } from "react-icons/io";
 import { useContext } from "react";
-import { ProductsContext } from "../../context/createContext";
+import { ProductsContext } from "../../context/shop/productsContext";
 import { FillStart } from "../FillStart";
 
 const SideBar = () => {

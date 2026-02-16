@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import Pagination from "./Pagination";
 import ShimmerUI from "../ShimmerUI";
 import ProductCard from "./ProductCard";
-import { ProductsContext } from "../../context/createContext";
+import { ProductsContext } from "../../context/shop/productsContext";
 import { Link } from "react-router";
 import { ErrorPage } from "../ErrorPage";
 
