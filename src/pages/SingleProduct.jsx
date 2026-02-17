@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { useParams, Link } from "react-router";
 import { CiHeart } from "react-icons/ci";
 import { AiFillHeart } from "react-icons/ai";
+import toast from "react-hot-toast";
 
 // --------------------------------------- Local Import
 
@@ -10,10 +11,12 @@ import useFetch from "../hook/useFetch";
 import ShimmerUI from "../components/ShimmerUI";
 import { ErrorPage } from "../components/ErrorPage";
 import { CartContext } from "../context/cart/cartContext";
+import { WishlistContext } from "../context/wishlist/wishlist";
 
 export const SingleProduct = () => {
   const { productId } = useParams();
   const { addToCart } = useContext(CartContext);
+  const { wishlist, addToWishlist } = useContext(WishlistContext);
 
   const [imageLoaded, setImageLoaded] = useState(false);
   const URL = `${PRODUCTS_URL}/${productId}`;
@@ -39,6 +42,8 @@ export const SingleProduct = () => {
       />
     );
   }
+
+  const isExistWishlist = wishlist.find((item) => item.id === singleProduct.id);
 
   const {
     id,
@@ -86,15 +91,19 @@ export const SingleProduct = () => {
             </span>
 
             <button
-              onClick={() => setIsWishlisted((prev) => !prev)}
+              onClick={() => addToWishlist(singleProduct)}
               className={`p-2 rounded-full border transition ${
-                isWishlisted
+                isExistWishlist
                   ? "bg-red-100 border-red-300 text-red-600"
                   : "border-gray-500 text-gray-700 hover:bg-gray-100"
               }`}
               title="Add to wishlist"
             >
-              {isWishlisted ? <AiFillHeart size={20} /> : <CiHeart size={20} />}
+              {isExistWishlist ? (
+                <AiFillHeart size={20} />
+              ) : (
+                <CiHeart size={20} />
+              )}
             </button>
           </div>
 
@@ -121,13 +130,21 @@ export const SingleProduct = () => {
           {/* Actions */}
           <div className="border-t pt-6 space-y-4">
             <button
-              onClick={() => addToCart(singleProduct)}
+              onClick={() => {
+                addToCart(singleProduct);
+                toast.success("Added to cart", {
+                  style: { backgroundColor: "#333", color: "white" },
+                });
+              }}
               className="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-xl text-lg font-semibold transition"
             >
               Add to Cart
             </button>
 
-            <button className="w-full border border-indigo-600 text-indigo-600 hover:bg-indigo-50 py-3 rounded-xl text-lg font-semibold transition">
+            <button
+              // onClick={""}
+              className="w-full border border-indigo-600 text-indigo-600 hover:bg-indigo-50 py-3 rounded-xl text-lg font-semibold transition"
+            >
               Buy Now
             </button>
           </div>

@@ -1,4 +1,5 @@
 import React from "react";
+import toast from "react-hot-toast";
 
 export const Card = ({ item, addToCart, decreaseQty, removeFromCart }) => {
   const { id, image, price, category, description, quantity, rating, title } =
@@ -40,7 +41,28 @@ export const Card = ({ item, addToCart, decreaseQty, removeFromCart }) => {
           <div className="text-right">
             <p className="font-medium">₹{(price * quantity).toFixed(2)}</p>
             <button
-              onClick={() => removeFromCart(id)}
+              onClick={() => {
+                removeFromCart(id);
+                toast(
+                  (t) => (
+                    <div className="flex items-center gap-4 ">
+                      <span>Item removed from cart</span>
+                      <button
+                        className="text-blue-400 font-semibold"
+                        onClick={() => {
+                          addToCart(item);
+                          toast.dismiss(t.id);
+                        }}
+                      >
+                        Undo
+                      </button>
+                    </div>
+                  ),
+                  {
+                    style: { backgroundColor: "#333", color: "white" },
+                  },
+                );
+              }}
               className="text-sm text-red-500 hover:underline mt-1"
             >
               Remove

@@ -9,6 +9,7 @@ import { NotFound } from "../pages/NotFound";
 import { ProductDetailCard } from "../components/shop/ProductDetailCard";
 import Cart from "../pages/Cart";
 import { SingleProduct } from "../pages/SingleProduct";
+import Wishlist from "../pages/Wishlist";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,7 @@ const router = createBrowserRouter([
       { path: "shop", element: <Shop /> },
       { path: "shop/:productId", element: <SingleProduct /> },
       { path: "/cart", element: <Cart /> },
+      { path: "/wishlist", element: <Wishlist /> },
     ],
   },
 ]);

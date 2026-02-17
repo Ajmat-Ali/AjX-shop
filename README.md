@@ -90,7 +90,17 @@ Each product contains:
 
 ✅ Products displayed as cards
 
-✅ Filter Products by: (search, sort, category, rating, price Range)
+### ✅ Core Features
+
+- ✅ Filter products by:
+  - Category
+  - Price range
+  - Rating
+
+- ✅ Sort products by:
+  - Price (Low → High, High → Low)
+
+- ✅ Search products by title ( **debounce** )
 
 ### ✅ Single Product Page
 
@@ -105,6 +115,11 @@ Each product contains:
 - ✅ Increase / decrease quantity
 - ✅ Cart total calculation
 - ✅ Persist cart using `localStorage`
+
+### ✅ Wishlist
+
+- ✅ Add / remove products
+- ✅ Persist wishlist using `localStorage`
 
 ---
 
@@ -127,8 +142,8 @@ Each product contains:
 - `/` → Home (optional)
 - `/shop` → Product listing page
 - `/shop/:id` → Single product page
-<!-- - `/cart` → Cart page
-- `/wishlist` → Wishlist page -->
+- `/cart` → Cart page
+- `/wishlist` → Wishlist page
 
 ---
 
@@ -154,10 +169,10 @@ Each product contains:
 - Cart total calculation
 - Persist cart using `localStorage` -->
 
-### Wishlist
+<!-- ### Wishlist
 
 - Add / remove products
-- Persist wishlist using `localStorage`
+- Persist wishlist using `localStorage` -->
 
 <!-- ### Single Product Page
 
@@ -186,15 +201,6 @@ Each product contains:
 
 ---
 
-<!-- ## Testing (Future Scope)
-
-- Manual UI testing
-- Possible introduction to:
-  - React Testing Library
-  - Jest (optional)
-
---- -->
-
 ## Notes for Future Me
 
 - Keep components **small and reusable**
@@ -217,7 +223,7 @@ Each product contains:
 ## Author
 
 **Ajmat Ali**
-Frontend / Full‑Stack (MERN) Learner & Freelancer Aspirant
+Frontend / Full‑Stack (MERN) Learner
 
 ---
 

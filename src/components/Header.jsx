@@ -40,7 +40,14 @@ export default function Header({ auth, setAuth }) {
               </NavLink>
             </li>
             <li className="cursor-pointer">
-              <FaHeart size={20} />
+              <NavLink
+                to="/wishlist"
+                className={({ isActive }) =>
+                  isActive ? "text-blue-500 font-semibold" : "text-gray-600"
+                }
+              >
+                <FaHeart size={20} />
+              </NavLink>
             </li>
             <li className="cursor-pointer" onClick={handleLogin}>
               <IoPersonCircle size={25} />

@@ -17,6 +17,7 @@ export const Home = () => {
   return (
     <div className="px-3">
       <Hero />
+
       {/* <input
         type="text"
         placeholder="Search..."
