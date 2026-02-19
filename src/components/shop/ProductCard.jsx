@@ -1,7 +1,7 @@
 import React from "react";
 
 const ProductCard = ({ product }) => {
-  const { category, description, image, price, rating, title } = product;
+  const { category, description, image, price, rating, title, id } = product;
 
   return (
     <div
@@ -26,7 +26,7 @@ const ProductCard = ({ product }) => {
           className="inline-block text-xs font-medium text-indigo-600 
                          bg-indigo-50 px-3 py-1 rounded-full"
         >
-          {category}
+          {category} {id}
         </span>
 
         {/* Title */}

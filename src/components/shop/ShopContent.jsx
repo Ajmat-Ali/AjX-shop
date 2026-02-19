@@ -5,6 +5,7 @@ import ProductCard from "./ProductCard";
 import { ProductsContext } from "../../context/shop/productsContext";
 import { Link } from "react-router";
 import { ErrorPage } from "../ErrorPage";
+import hoc from "../../utils/hoc";
 
 const ShopContent = () => {
   const { products, query, dispatch, err, loader } =
@@ -44,6 +45,8 @@ const ShopContent = () => {
     );
   }
 
+  let HigherOrderComponent = hoc(ProductCard);
+
   if (products.length <= 0) {
     return (
       <div className="flex-1 p-8 overflow-y-auto">
@@ -58,7 +61,7 @@ const ShopContent = () => {
     <div className="flex-1 p-8 overflow-y-auto">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 ">
         <h1 className="text-2xl font-bold mb-4 sm:mb-0">
-          {query.category.split(" ")[0]} Products
+          {query?.category?.split(" ")[0]} Products
         </h1>
 
         <div className="flex items-center gap-4">
@@ -80,11 +83,15 @@ const ShopContent = () => {
       </div>
       {/*  */}
 
-      <div className="grid grid-cols-3 gap-x-20 gap-y-20">
+      <div className="grid grid-cols-3 gap-x-20 gap-y-20 border">
         {products.map((product) => {
           return (
             <Link to={`/shop/${product.id}`} key={product.id}>
-              <ProductCard product={product} />
+              {product.rating.rate >= 4 ? (
+                <HigherOrderComponent product={product} />
+              ) : (
+                <ProductCard product={product} />
+              )}
             </Link>
           );
         })}

@@ -3,6 +3,8 @@ import { Outlet } from "react-router";
 import CartProvider from "./context/cart/CartProvider";
 import { Toaster } from "react-hot-toast";
 import { WishlistProvider } from "./context/wishlist/WishlistProvider";
+import { ProductsContext } from "./context/shop/productsContext";
+import { useContext } from "react";
 
 export default function App() {
   return (

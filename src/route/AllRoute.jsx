@@ -6,7 +6,7 @@ import Home from "../pages/Home";
 import Shop from "../pages/Shop";
 import App from "../App";
 import { NotFound } from "../pages/NotFound";
-import { ProductDetailCard } from "../components/shop/ProductDetailCard";
+// import { ProductDetailCard } from "../components/shop/ProductDetailCard";
 import Cart from "../pages/Cart";
 import { SingleProduct } from "../pages/SingleProduct";
 import Wishlist from "../pages/Wishlist";
