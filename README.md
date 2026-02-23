@@ -24,6 +24,7 @@ This README acts as a **living document**. As new features are added or architec
 - **Parcel** – Bundler
 - **Tailwind CSS** – Utility-first CSS framework
 - **FakeStore API** – Fake product data source
+- **Redux Toolkit** – To manage data
 
 ---
 
@@ -38,7 +39,8 @@ AjX-Shop/
 │   ├── pages/             # Page-level components (Home, Shop, Cart)
 │   ├── hooks/             # Custom React hooks
 │   ├── utils/             # Helper functions (constant data, reducer)
-│   ├── route/             # All Route t move any particular url
+│   ├── route/             # All Route to move any particular url
+│   ├── redux/             # Redux Library to manage state globally
 │   ├── App.jsx            # Main app component
 |
 ├── main.js                # Entry point

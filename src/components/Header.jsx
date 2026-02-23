@@ -4,11 +4,15 @@ import { FaHeart } from "react-icons/fa6";
 import { IoPersonCircleSharp } from "react-icons/io5";
 import { IoPersonCircle } from "react-icons/io5";
 import { Link, NavLink } from "react-router";
+import { useSelector } from "react-redux";
 
 export default function Header({ auth, setAuth }) {
   const handleLogin = () => {
     setAuth(!auth);
   };
+
+  const reduxCartItems = useSelector((store) => store.cart.items);
+
   return (
     <>
       <header className="flex justify-between p-4 bg-white shadow-xl rounded-md mb-10">
@@ -30,6 +34,7 @@ export default function Header({ auth, setAuth }) {
               </NavLink>
             </li>
             <li className="cursor-pointer">
+              <span>({reduxCartItems.length} - items)</span>
               <NavLink
                 to="/cart"
                 className={({ isActive }) =>
