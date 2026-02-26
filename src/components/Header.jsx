@@ -5,13 +5,19 @@ import { IoPersonCircleSharp } from "react-icons/io5";
 import { IoPersonCircle } from "react-icons/io5";
 import { Link, NavLink } from "react-router";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { addItem } from "../redux/cartSlice";
 
 export default function Header({ auth, setAuth }) {
   const handleLogin = () => {
     setAuth(!auth);
   };
-
   const reduxCartItems = useSelector((store) => store.cart.items);
+  const dispatch = useDispatch();
+  const handleAddItem = () => {
+    dispatch(addItem("New Data Ajmat Ji"));
+  };
+  console.log(reduxCartItems);
 
   return (
     <>
@@ -33,7 +39,7 @@ export default function Header({ auth, setAuth }) {
                 Home
               </NavLink>
             </li>
-            <li className="cursor-pointer">
+            <li onClick={handleAddItem} className="cursor-pointer">
               <span>({reduxCartItems.length} - items)</span>
               <NavLink
                 to="/cart"

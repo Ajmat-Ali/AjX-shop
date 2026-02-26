@@ -7,6 +7,7 @@ import { ProductsContext } from "./context/shop/productsContext";
 import { useContext } from "react";
 import appStore from "./redux/appStore";
 import { Provider } from "react-redux";
+import { LoadProducts } from "./components/LoadProducts";
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
       <div className="bg-gray-50 w-11/12 m-auto mt-1 rounded-xl ">
         <Toaster />
         <Provider store={appStore}>
+          <LoadProducts></LoadProducts>
           <CartProvider>
             <WishlistProvider>
               <Header />
