@@ -7,63 +7,83 @@ import { Link, NavLink } from "react-router";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { addItem } from "../redux/cartSlice";
+import { RxHamburgerMenu } from "react-icons/rx";
+import { MdClose } from "react-icons/md";
 
-export default function Header({ auth, setAuth }) {
-  const handleLogin = () => {
-    setAuth(!auth);
-  };
+export default function Header() {
+  const [showNav, setShowNav] = useState(false);
+
   const reduxCartItems = useSelector((store) => store.cart.items);
   const dispatch = useDispatch();
   const handleAddItem = () => {
     dispatch(addItem("New Data Ajmat Ji"));
   };
-  console.log(reduxCartItems);
+  const handleShowNav = () => {
+    setShowNav(!showNav);
+  };
 
   return (
     <>
-      <header className="flex justify-between p-4 bg-white shadow-xl rounded-md mb-10">
-        <div className="border-2">
-          <h1 className="text-3xl font-bold">
-            <span className="text-blue-400">AjX</span> Shop
+      <header className="bg-white shadow-md rounded-md  p-4 mb-8 flex flex-col items-center gap-4 md:flex-row md:justify-between md:items-center sticky top-0 z-100 ">
+        <div className=" flex justify-between w-full">
+          <h1 className="text-2xl md:text-3xl font-bold">
+            <span className="text-blue-500">AjX</span> Shop
           </h1>
+          <button onClick={handleShowNav} className=" hidden max-md:block ">
+            {showNav ? <MdClose size={30} /> : <RxHamburgerMenu size={25} />}
+          </button>
         </div>
-        <nav className="border border-4 border-red-900">
-          <ul className="flex items-center text-gray-600 gap-x-6 text-md p-2">
+
+        <nav className={``}>
+          <ul
+            className={`flex-col items-center gap-6 text-gray-600 md:flex-row md:gap-8 ${showNav ? "flex" : "hidden"} md:flex max-md:gap-y-5 `}
+          >
             <li className="cursor-pointer">
               <NavLink
                 to="/"
                 className={({ isActive }) =>
-                  isActive ? "text-blue-500 font-semibold" : "text-gray-600"
+                  isActive
+                    ? "text-blue-500 font-semibold"
+                    : "hover:text-blue-500"
                 }
               >
                 Home
               </NavLink>
             </li>
-            <li onClick={handleAddItem} className="cursor-pointer">
-              <span>({reduxCartItems.length} - items)</span>
+
+            <li onClick={handleAddItem} className="cursor-pointer relative">
+              <span className="absolute -top-2 -right-3 text-xs bg-red-500 text-white px-1.5 rounded-full">
+                {reduxCartItems.length}
+              </span>
+
               <NavLink
                 to="/cart"
                 className={({ isActive }) =>
-                  isActive ? "text-blue-500 font-semibold" : "text-gray-600"
+                  isActive
+                    ? "text-blue-500 font-semibold"
+                    : "hover:text-blue-500"
                 }
               >
                 <FaShoppingCart size={20} />
               </NavLink>
             </li>
+
             <li className="cursor-pointer">
               <NavLink
                 to="/wishlist"
                 className={({ isActive }) =>
-                  isActive ? "text-blue-500 font-semibold" : "text-gray-600"
+                  isActive
+                    ? "text-blue-500 font-semibold"
+                    : "hover:text-blue-500"
                 }
               >
                 <FaHeart size={20} />
               </NavLink>
             </li>
-            <li className="cursor-pointer" onClick={handleLogin}>
-              <IoPersonCircle size={25} />
+
+            <li className="cursor-pointer">
+              <IoPersonCircle size={26} className="hover:text-blue-500" />
             </li>
-            {/* <li>Profile</li> */}
           </ul>
         </nav>
       </header>
