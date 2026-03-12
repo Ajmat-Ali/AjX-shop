@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { addItem } from "../redux/cartSlice";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { MdClose } from "react-icons/md";
+import { IoHome } from "react-icons/io5";
 
 export default function Header() {
   const [showNav, setShowNav] = useState(false);
@@ -19,7 +20,11 @@ export default function Header() {
     dispatch(addItem("New Data Ajmat Ji"));
   };
   const handleShowNav = () => {
-    setShowNav(!showNav);
+    setShowNav(true);
+  };
+
+  const handleHideNav = () => {
+    setShowNav(false);
   };
 
   return (
@@ -29,16 +34,24 @@ export default function Header() {
           <h1 className="text-2xl md:text-3xl font-bold">
             <span className="text-blue-500">AjX</span> Shop
           </h1>
-          <button onClick={handleShowNav} className=" hidden max-md:block ">
-            {showNav ? <MdClose size={30} /> : <RxHamburgerMenu size={25} />}
-          </button>
+          <div>
+            {showNav ? (
+              <button onClick={handleHideNav} className=" hidden max-md:block ">
+                <MdClose size={30} />
+              </button>
+            ) : (
+              <button onClick={handleShowNav} className=" hidden max-md:block ">
+                <RxHamburgerMenu size={25} />
+              </button>
+            )}
+          </div>
         </div>
 
         <nav className={``}>
           <ul
             className={`flex-col items-center gap-6 text-gray-600 md:flex-row md:gap-8 ${showNav ? "flex" : "hidden"} md:flex max-md:gap-y-5 `}
           >
-            <li className="cursor-pointer">
+            <li className="cursor-pointer" onClick={handleHideNav}>
               <NavLink
                 to="/"
                 className={({ isActive }) =>
@@ -47,11 +60,11 @@ export default function Header() {
                     : "hover:text-blue-500"
                 }
               >
-                Home
+                <IoHome size={20} />
               </NavLink>
             </li>
 
-            <li onClick={handleAddItem} className="cursor-pointer relative">
+            <li onClick={handleHideNav} className="cursor-pointer relative">
               <span className="absolute -top-2 -right-3 text-xs bg-red-500 text-white px-1.5 rounded-full">
                 {reduxCartItems.length}
               </span>
@@ -68,7 +81,7 @@ export default function Header() {
               </NavLink>
             </li>
 
-            <li className="cursor-pointer">
+            <li className="cursor-pointer" onClick={handleHideNav}>
               <NavLink
                 to="/wishlist"
                 className={({ isActive }) =>

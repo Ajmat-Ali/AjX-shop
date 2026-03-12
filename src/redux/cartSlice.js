@@ -10,10 +10,10 @@ const cartSlice = createSlice({
       state.items.push(actions.payload);
     },
     removeItem: (state, actions) => {
-      console.log(actions);
+      // console.log(actions);
     },
     clearItem: (state, actions) => {
-      console.log(actions);
+      // console.log(actions);
     },
   },
 });

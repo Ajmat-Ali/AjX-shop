@@ -5,14 +5,14 @@ export const Card = ({ item, addToCart, decreaseQty, removeFromCart }) => {
   const { id, image, price, category, description, quantity, rating, title } =
     item;
   return (
-    <div className="flex gap-6 p-5 border rounded-2xl bg-white hover:shadow-md transition">
+    <div className="flex gap-6 p-5 border rounded-2xl bg-white hover:shadow-md transition  max-sm:flex-col max-sm:items-center">
       {/* Product Image */}
       <div className="w-28 h-28 flex-shrink-0">
         <img src={image} alt={title} className="w-full h-full object-contain" />
       </div>
 
       {/* Product Info */}
-      <div className="flex-1 flex flex-col justify-between">
+      <div className="flex-1 flex flex-col justify-between max-md:w-full">
         <div>
           <h3 className="font-medium text-lg line-clamp-2">{title}</h3>
           <p className="text-gray-500 mt-1">₹{price}</p>
