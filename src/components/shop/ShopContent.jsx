@@ -58,8 +58,8 @@ const ShopContent = () => {
   }
 
   return (
-    <div className="flex-1 p-8 overflow-y-auto">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 ">
+    <div className="flex-1 p-8 overflow-y-auto  max-sm:p-3">
+      <div className="flex justify-between items-start sm:items-center mb-6 max-sm:flex-col max-sm:items-center max-sm:gap-y-5  w-full">
         <h1 className="text-2xl font-bold mb-4 sm:mb-0">
           {query?.category?.split(" ")[0]} Products
         </h1>
@@ -83,7 +83,7 @@ const ShopContent = () => {
       </div>
       {/*  */}
 
-      <div className="grid grid-cols-3 gap-x-20 gap-y-20 border">
+      <div className="grid grid-cols-3 gap-x-20 gap-y-20  max-xl:grid-cols-2 max-md:grid-cols-1">
         {products.map((product) => {
           return (
             <Link to={`/shop/${product.id}`} key={product.id}>

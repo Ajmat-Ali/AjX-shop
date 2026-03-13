@@ -5,7 +5,7 @@ const ProductCard = ({ product }) => {
 
   return (
     <div
-      className="group cursor-pointer bg-white rounded-2xl shadow-sm 
+      className=" group cursor-pointer bg-white rounded-2xl shadow-sm 
                  hover:shadow-xl hover:-translate-y-1 transition-all duration-300 
                  overflow-hidden border border-transparent hover:border-indigo-100"
     >
