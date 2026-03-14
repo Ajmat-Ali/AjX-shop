@@ -9,6 +9,8 @@ import { NotFound } from "../pages/NotFound";
 import Cart from "../pages/Cart";
 import { SingleProduct } from "../pages/SingleProduct";
 import Wishlist from "../pages/Wishlist";
+import Login from "../pages/Login";
+import Signin from "../pages/Signin";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +23,8 @@ const router = createBrowserRouter([
       { path: "shop/:productId", element: <SingleProduct /> },
       { path: "/cart", element: <Cart /> },
       { path: "/wishlist", element: <Wishlist /> },
+      { path: "/login", element: <Login /> },
+      { path: "/signin", element: <Signin /> },
     ],
   },
 ]);
