@@ -192,4 +192,4 @@ Frontend / Full‑Stack (MERN) Learner
 
 ---
 
-> This project is for **learning & portfolio purposes**.
+

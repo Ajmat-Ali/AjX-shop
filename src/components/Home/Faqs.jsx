@@ -1,41 +1,3 @@
-// import React, { useState } from "react";
-// import { faqs } from "../../utils/constant";
-
-// export const Faqs = () => {
-//   const [openFaqIndex, setopenFaqIndex] = useState([]);
-
-//   const handleAccordion = (index) => {
-//     setopenFaqIndex((prev) => {
-//       return prev.includes(index)
-//         ? prev.filter((i) => i !== index)
-//         : [...prev, index];
-//     });
-//   };
-//   return (
-//     <div>
-//       {faqs.map((faq, index) => {
-//         return (
-//           <div key={index} className="border mb-2 p-4">
-//             <button
-//               onClick={() => handleAccordion(index)}
-//               aria-expanded={openFaqIndex.includes(index)}
-//               className="  pb-2"
-//             >
-//               {faq.question}
-//             </button>
-//             {openFaqIndex.includes(index) && (
-//               <p className={` border-t-2  pt-2 bg-black text-white`}>
-//                 {faq.answer}
-//               </p>
-//             )}
-//           </div>
-//         );
-//       })}
-//     </div>
-//   );
-// };
-
-// ------------------------------------------------ One accordion open at once ---------------------------
 import React, { useState } from "react";
 import { faqs } from "../../utils/constant";
 
@@ -50,19 +12,29 @@ export const Faqs = () => {
   return (
     <div>
       {faqs.map((faq, index) => {
+        const isOpen = openFaqIndex === index;
+
         return (
-          <div key={index} className="border mb-2 p-4">
+          <div
+            key={index}
+            className="border border-gray-200 rounded-lg mb-3 overflow-hidden transition-all duration-200"
+          >
             <button
               onClick={() => handleAccordion(index)}
-              aria-expanded={openFaqIndex === index}
-              className=" pb-2"
+              // aria-expanded={isOpen}
+              className="w-full flex justify-between items-center p-4 text-left font-medium text-gray-900 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors duration-150 cursor-pointer"
             >
-              {faq.question}
+              <span>{faq.question}</span>
+
+              <span className="ml-4 text-xl font-bold text-gray-500 select-none">
+                {isOpen ? "-" : "+"}
+              </span>
             </button>
-            {openFaqIndex === index && (
-              <p className={` border-t-2  pt-2 bg-black text-white`}>
-                {faq.answer}
-              </p>
+
+            {isOpen && (
+              <div className="border-t border-gray-200 p-4 bg-gray-50 text-gray-700 leading-relaxed">
+                <p>{faq.answer}</p>
+              </div>
             )}
           </div>
         );

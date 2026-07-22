@@ -19,7 +19,7 @@ const Cart = () => {
 
   return (
     <div className="px-4 md:px-10 py-8">
-      <h1 className="text-3xl font-semibold mb-8">Shopping Cart</h1>
+      <h1 className="text-3xl font-semibold mb-8 ">Shopping Cart</h1>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/*------------------- LEFT: Cart Items ---------------------------*/}

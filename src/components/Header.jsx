@@ -17,7 +17,7 @@ export default function Header() {
   const reduxCartItems = useSelector((store) => store.cart.items);
   const dispatch = useDispatch();
   const handleAddItem = () => {
-    dispatch(addItem("New Data Ajmat Ji"));
+    dispatch(addItem("New Data "));
   };
   const handleShowNav = () => {
     setShowNav(true);
